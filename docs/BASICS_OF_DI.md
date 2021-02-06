@@ -57,9 +57,11 @@ So now all we've done is "push the problem up one level further" you might say. 
 
 This is the true power of DI. Ultimate configuration of your entire application in one place.
 
-So how does this tie with our API? Well. Continuing with the above example, we now have a global `myClassFactory` that we wanna use every time we wanna instanciate a new MyClass. So we basically have some global state.
+# Now everything is injected, and we have factories everywhere, what does my app look like?
 
-We could do:
+Well, continuing with the above example we now have a global `myClassFactory` that we wanna use every time we wanna instanciate a new MyClass.
+
+So we basically have some global state. We could do:
 
 ```js
 // here are all our classes
@@ -106,3 +108,60 @@ const GlobalAppState = {
 ```
 
 So you can see, just by changing how we bootstrap the application, changes how the entire thing functions! DI ftw.
+
+## Converting the above example to our API
+
+```js
+// import all classes used in our app
+import Logger from './Logger.js';
+import MyClassFactory from './MyClassFactory.js';
+import Application from './Application.js';
+
+// make global app state
+const GlobalAppState = container({
+  logger: make(Logger),
+
+  myClassFactory: make(MyClassFactory, [ref('logger')]),
+
+  myApplication: make(Application, [ref('myClassFactory')]),
+});
+
+// example usage, use however you want!
+GlobalAppState.logger.log('hello');
+
+// can use anything directly (though, should you?)
+const myClass = GlobalAppState.myClassFactory.newMyClass();
+
+// run a function on a thing, when ever, where ever and how ever you need
+GlobalAppState.myApplication.run();
+```
+
+# Final thoughts
+
+Finally, now you might say "why would we use your API over native javascript?" because clearly:
+
+```js
+const GlobalAppState = {
+  logger: new MockedLogger(), // note this is a MOCKED logger
+  myClassFactory: new MyClassFactory(this.logger),
+  myApplication: new Application(this.myClassFactory),
+};
+```
+
+is easier to read than:
+
+```js
+const GlobalAppState = container({
+  logger: make(Logger),
+
+  myClassFactory: make(MyClassFactory, [ref('logger')]),
+
+  myApplication: make(Application, [ref('myClassFactory')]),
+});
+```
+
+and yes you are correct. However, native JS doesn't do many other DI concepts. Things like:
+
+- auto wiring
+- code splitting
+- late instanciation as needed
