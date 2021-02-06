@@ -12,7 +12,7 @@ We are not saying you _should_ use DI for javascript, just that it's possible. I
 
 # Why you probably shouldn't use this
 
-The feature set of this library is incomplete, and anything you can achieve with this library, you can also acheive using native JS (See [basics of DI](/docs/BASICS_OF_DI.md)). This is **experimental** and hasn't been extensively tested in the wild. The author may also be slow to respond as they have many other responsibilities (Although the author would be open to opening up the repo to collaborators)
+The feature set of this library is incomplete, and anything you can achieve with this library, you can also acheive using native JS (See [basics of DI](/docs/BASICS_OF_DI.md#final-thoughts)). This is **experimental** and hasn't been extensively tested in the wild. The author may also be slow to respond as they have many other responsibilities (Although the author would be open to opening up the repo to collaborators)
 
 # Examples
 
