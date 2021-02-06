@@ -4,9 +4,9 @@ export function container(inputDef) {
   const definition = {...inputDef};
   const graph = buildGraph(definition);
 
-  // we now have the dependancy graph
+  // we now have the dependency graph
   if (graph.isCircular()) {
-    throw new Error('Circular dependancies error');
+    throw new Error('Circular dependencies error');
   }
 
   // the graph has been verified as not being circular,

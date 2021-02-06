@@ -5,7 +5,7 @@ export default class GraphNode {
   }
 
   forEachDepthFirst(callback) {
-    this.nodes.forEach(node => {
+    this.nodes.forEach((node) => {
       node.forEachDepthFirst(callback);
     });
     callback(this);
@@ -15,22 +15,22 @@ export default class GraphNode {
     this.nodes.push(node);
   }
 
-  getAllDependancies() {
-    let blah = this.getDirectDependancies();
-    this.nodes.forEach(node => {
-      blah = blah.concat(node.getAllDependancies());
+  getAllDependencies() {
+    let blah = this.getDirectDependencies();
+    this.nodes.forEach((node) => {
+      blah = blah.concat(node.getAllDependencies());
     });
     return blah;
   }
 
-  getDirectDependancies() {
-    return this.nodes.map(node => node.id);
+  getDirectDependencies() {
+    return this.nodes.map((node) => node.id);
   }
 
   isCircular() {
-    const deps = this.getAllDependancies();
+    const deps = this.getAllDependencies();
     const containsKey = deps.includes(this.id);
 
-    return containsKey || this.nodes.some(node => node.isCircular());
+    return containsKey || this.nodes.some((node) => node.isCircular());
   }
 }
