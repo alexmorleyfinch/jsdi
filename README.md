@@ -2,6 +2,8 @@
 
 **J**ava**S**cript **D**ependancy-**I**njection
 
+If you are not familiar with dependency injection, we recommend you read up on it. We have a small document explaining the basics of DI, but you'd probably be better off learning it from somewhere properly rather than reading our [quick summary](/docs/BASICS_OF_DI.md).
+
 # But why
 
 ES6 introduced `import` and `export`, so Javascript doesn't actually _need_ dependency injection, but it's a good pattern to learn and use. It makes code more testable because you don't have to magically mock `import` statements, you just pass in mocked objects.
@@ -16,7 +18,7 @@ You can use JSDI with only 3 functions. `container`, `make` and `ref`.
 - `make` is used to instanciate classes.
 - `ref` is used to reference other parts of the object.
 
-## `container(object input_dependencies): object computed_output`
+## `container(input: object): object`
 
 First, create some kind of container (global object) using the `container` function:
 
@@ -37,7 +39,7 @@ console.log(MySuperGlobal.i); // > {can: [{contain: 'anything'}]}
 console.log(MySuperGlobal.i.can[0].contain); // > 'anything'
 ```
 
-## `make(class|function constructor, any[] constructor_arguments): make_placeholder placeholder`
+## `make(type: Constructor, args: any[] = []): AbstractPlaceholder`
 
 Then instruct JSDI to make the classes using the `make` function. :
 
@@ -57,7 +59,7 @@ console.log(MySuperGlobal.myInstanceCreator); // > MyFactory
 console.log(MySuperGlobal.myInstanceCreator.createMyClass()); // > MyClass
 ```
 
-## `ref(string keys): ref_placeholder placeholder`
+## `ref(name: string): AbstractPlaceholder`
 
 You can then reference other parts of the container using the `ref` function:
 
