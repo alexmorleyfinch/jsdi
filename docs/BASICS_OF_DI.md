@@ -1,6 +1,6 @@
-# Basics of dependancy injection
+# Basics of dependency injection
 
-There are plenty of resources on DI, much better than here, but here is a quick summary. The idea of dependancy injection is the inject all dependancies via class constructors. That means no `import` at the top of a file. There are exceptions depending on how far you want to take it. For example, you can import core primitives like a Vector classes etc, but anything beyond a core primitive needs injecting.
+There are plenty of resources on DI, much better than here, but here is a quick summary. The idea of dependency injection is to inject all dependencies via class constructors. That means no `import` at the top of a file. There are exceptions depending on how far you want to take it. For example, you can import core primitives like a Vector classes etc, but anything beyond a core primitive needs injecting.
 
 For example, normally we'd have a way to log stuff, and we'd import it like:
 
@@ -14,7 +14,7 @@ export default MyClass {
 }
 ```
 
-This is pretty standard for JS these days, and there is nothing wrong with it. However, what if you wanted to change the value of `Logger` at runtime? Or what if you wanted 2 sets of loggers and switch between the two sets depending on some condition? You'd struggle... Yeah you could hack it in... You could have `logger.js` export 2 different things depending on the environment or something. OR, you could use DI, which gives you more flexibility.
+This is pretty standard for JS these days, and there is nothing wrong with it. However, what if you wanted to change the value of `Logger` at runtime? Or what if you wanted 2 sets of loggers and switch between the two sets depending on some condition? You'd struggle... You could hack it in, for example you could have `logger.js` export 2 different things depending on the environment or something. Or you could use DI which gives you more flexibility.
 
 For example:
 
@@ -53,13 +53,13 @@ const myClassFactory = new MyClassFactory(logger); // logger is passed in here
 const myClassInstance = myClassFactory.newMyClass(); // and not here
 ```
 
-So now all we've done is "push the problem up one level further" you might say. Well... Now, myClassFactory can be a global, and its well defined ahead of time that MyClassFactory needs a logger. Its there in the code, obvious. What if you wanna change the logger for production? Just pass in a new logger instance. What if you wanna change how the logger behaves in unit tests? Just pass in a mocked instance.
+So now all we've done is "push the problem up one level further" you might say. Well, now myClassFactory can be a global, and it's well defined ahead of time that MyClassFactory needs a logger. It's there in the code, obvious. What if you wanna change the logger for production? Just pass in a new logger instance. What if you wanna change how the logger behaves in unit tests? Just pass in a mocked instance.
 
 This is the true power of DI. Ultimate configuration of your entire application in one place.
 
 # Now everything is injected, and we have factories everywhere, what does my app look like?
 
-Well, continuing with the above example we now have a global `myClassFactory` that we wanna use every time we wanna instanciate a new MyClass.
+Well, continuing with the above example we now have a global `myClassFactory` that we wanna use every time we wanna instanciate a new `MyClass`.
 
 So we basically have some global state. We could do:
 
@@ -162,6 +162,5 @@ const GlobalAppState = container({
 
 and yes you are correct. However, native JS doesn't do many other DI concepts. Things like:
 
-- auto wiring
-- code splitting
-- late instanciation as needed
+- auto wiring [NOT YET IMPLEMENTED]
+- late instanciation as needed [NOT YET IMPLEMENTED]

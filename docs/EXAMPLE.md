@@ -48,8 +48,10 @@ export default container({
   ]),
 
   levels: {
-    level1: {/* level definition probably from a json file */},
-  }
+    level1: {
+      /* level definition probably from a json file */
+    },
+  },
 
   /**
    * Make the level factory:
@@ -57,7 +59,7 @@ export default container({
    *   const level = levelFactory.createLevel(levels.level1);
    *
    */
-  levelFactory: make(LevelFactory)
+  levelFactory: make(LevelFactory),
 
   /**
    * Make player controller (accepts controller and controls enum as arguments):

@@ -1,8 +1,8 @@
 # JSDI
 
-**J**ava**S**cript **D**ependancy-**I**njection
+**J**ava**S**cript **D**ependency-**I**njection
 
-If you are not familiar with dependency injection, we recommend you read up on it. We have a small document explaining the basics of DI, but you'd probably be better off learning it from somewhere properly rather than reading our [quick summary](/docs/BASICS_OF_DI.md).
+If you are not familiar with dependency injection, we recommend you read up on it. We have a small document explaining the basics of DI, but you'd probably be better off learning it from a legitimate learning resource rather than reading our [quick summary](/docs/BASICS_OF_DI.md).
 
 # But why
 
@@ -12,7 +12,7 @@ We are not saying you _should_ use DI for javascript, just that it's possible. I
 
 # Why you probably shouldn't use this
 
-The feature set of this library is incomplete, and anything you can achieve with this library, you can also acheive using native JS (See [basics of DI](/docs/BASICS_OF_DI.md#final-thoughts)). This is **experimental** and hasn't been extensively tested in the wild. The author may also be slow to respond as they have many other responsibilities (Although the author would be open to opening up the repo to collaborators)
+The feature set of this library is incomplete, and anything you can achieve with this library, you can also acheive using native JS (See [basics of DI](/docs/BASICS_OF_DI.md#final-thoughts)). This is **experimental** and hasn't been extensively tested in the wild. The author may also be slow to respond as they have many other responsibilities.
 
 # Examples
 
