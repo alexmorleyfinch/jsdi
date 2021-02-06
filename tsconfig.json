@@ -1,18 +1,14 @@
 {
   "compilerOptions": {
-    "target":"ES5",
-    "module":"CommonJS",
-    "lib": [
-      "es2020",
-      "dom"
-    ],
+    "target": "ES5",
+    "module": "AMD",
+    "lib": ["ES2020", "DOM"],
     "declaration": true,
-    "outDir": "dist",
+    "outFile": "dist/index.js",
     "rootDir": "src",
     "strict": true,
     "types": ["node"],
     "esModuleInterop": true,
-    "resolveJsonModule": true,
     "downlevelIteration": true
   }
 }

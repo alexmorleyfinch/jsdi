@@ -5,6 +5,24 @@ import {MakePlaceholder, RefPlaceholder} from './placeholders';
 export function buildGraph(definition: object): Graph {
   const graph = new Graph();
 
+  // for (const nextRef of recurseObjectForMarkers(definition, {ref: true})) {
+  //   if (nextRef.value instanceof RefPlaceholder) {
+  //     const refNode = new GraphNode(nextRef.value.name);
+
+  //     if (graph.hasTopLevelNode(refNode.id)) {
+  //       const newNode = graph.removeTopLevel(refNode.id);
+
+  //       if (newNode == null) {
+  //         throw new Error('Call to `ref` contained a string that points to a non-existent node');
+  //       }
+
+  //       graph.topLevelNodes.push(newNode);
+  //     } else {
+  //       graph.topLevelNodes.push(refNode);
+  //     }
+  //   }
+  // }
+
   for (const nextMake of recurseObjectForMarkers(definition, {make: true})) {
     if (nextMake.value instanceof MakePlaceholder) {
       const node = new GraphNode(nextMake.key.join('.'));
