@@ -1,0 +1,25 @@
+{
+  "name": "jsdi",
+  "version": "0.0.0",
+  "description": "Dependency injection for Javascript",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "javascript",
+    "dependency-injection",
+    "js",
+    "di"
+  ],
+  "author": "Alex Morley-Finch",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexmorleyfinch/jsdi.git"
+  },
+  "bugs": {
+    "url": "https://github.com/alexmorleyfinch/jsdi/issues"
+  },
+  "homepage": "https://github.com/alexmorleyfinch/jsdi#readme"
+}
