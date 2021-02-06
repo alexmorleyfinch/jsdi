@@ -1,21 +1,25 @@
-export default class Graph {
+import {GraphNode} from './GraphNode';
+
+export class Graph {
+  topLevelNodes: GraphNode[];
+
   constructor() {
     this.topLevelNodes = [];
   }
 
   // calls a callback on each node
   // iterates nodes depth first
-  forEachDepthFirst(callback) {
-    this.topLevelNodes.forEach(node => {
+  forEachDepthFirst(callback: (node: GraphNode) => void) {
+    this.topLevelNodes.forEach((node) => {
       node.forEachDepthFirst(callback);
     });
   }
 
   isCircular() {
-    return this.topLevelNodes.some(node => node.isCircular());
+    return this.topLevelNodes.some((node) => node.isCircular());
   }
 
-  hasTopLevelNode(id) {
+  hasTopLevelNode(id: string) {
     for (let i = 0; i < this.topLevelNodes.length; i++) {
       if (this.topLevelNodes[i].id === id) {
         return true;
@@ -24,7 +28,7 @@ export default class Graph {
     return false;
   }
 
-  removeTopLevel(id) {
+  removeTopLevel(id: string) {
     for (let i = 0; i < this.topLevelNodes.length; i++) {
       if (this.topLevelNodes[i].id === id) {
         const nodeToRemove = this.topLevelNodes[i];

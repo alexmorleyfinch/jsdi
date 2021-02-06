@@ -1,17 +1,20 @@
-export default class GraphNode {
-  constructor(id) {
+export class GraphNode {
+  id: string;
+  nodes: GraphNode[];
+
+  constructor(id: string) {
     this.id = id;
     this.nodes = [];
   }
 
-  forEachDepthFirst(callback) {
+  forEachDepthFirst(callback: (node: GraphNode) => void) {
     this.nodes.forEach((node) => {
       node.forEachDepthFirst(callback);
     });
     callback(this);
   }
 
-  addNode(node) {
+  addNode(node: GraphNode) {
     this.nodes.push(node);
   }
 
@@ -27,7 +30,7 @@ export default class GraphNode {
     return this.nodes.map((node) => node.id);
   }
 
-  isCircular() {
+  isCircular(): boolean {
     const deps = this.getAllDependencies();
     const containsKey = deps.includes(this.id);
 
