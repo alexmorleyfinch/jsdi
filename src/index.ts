@@ -5,8 +5,8 @@ import {Constructor} from './types';
 /**
  * API, used to wrap objects that use `make` or `ref`.
  */
-export function container(input: object): object {
-  const cont = new Container(input);
+export function container(definition: object): object {
+  const cont = new Container(definition);
 
   cont.replacePlaceholders();
 

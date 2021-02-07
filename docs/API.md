@@ -1,6 +1,6 @@
 # API
 
-## `container(input: object): object`
+## `container(definition: object): object`
 
 First, create some kind of container (global object) using the `container` function:
 
