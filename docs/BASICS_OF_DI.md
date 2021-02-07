@@ -162,7 +162,7 @@ const GlobalAppState = container({
 
 It is easier to read, but it doesn't work.
 
-We can't use `this.logger` because `this` refers to `window`. Also, we don't always want in instantiate classes straight away. We can hold off instantiating them until they are needed. jsdi allows:
+We can't use `this.logger` because `this` refers to `window`. Also, we don't always want in instantiate classes straight away. We can hold off instantiating them until they are needed. JSDI allows:
 
 - referencing other parts of the container
 - auto wiring [NOT YET IMPLEMENTED]

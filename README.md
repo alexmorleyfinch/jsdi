@@ -12,9 +12,9 @@ We are not saying you _should_ use DI for javascript, just that it's possible. I
 
 # Why you probably shouldn't use this
 
-> This is **experimental** and hasn't been extensively tested in the wild.
-> The feature set of this library is incomplete. See [basics of DI](/docs/BASICS_OF_DI.md#final-thoughts)).
-> There is currently only one author that may also be slow to respond to issues and pull requests.
+> - This is **experimental** and hasn't been extensively tested in the wild.
+> - The feature set of this library is incomplete.
+> - There is currently only one author that may also be slow to respond to issues and pull requests.
 
 We certainly wouldn't recommend this for any real projects. We're just using it for experimentation.
 
