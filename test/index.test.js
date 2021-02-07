@@ -123,6 +123,9 @@ test('Should ref a make', () => {
   expect(output.myClass3.arg2).toBe(output.myClass2);
 });
 
+// TODO note, support for this is not required, as there are ways around it, but would be nice.
+//      test case has been stubbed up for now.
+//
 // test('Should make a make', () => {
 //   const MyClass = class {
 //     constructor(arg1, arg2) {
@@ -130,21 +133,21 @@ test('Should ref a make', () => {
 //       this.arg2 = arg2;
 //     }
 //   };
-
+//
 //   const input = {
 //     string1: 'string1',
 //     string2: 'string2',
-
+//
 //     myClass: make(MyClass, [make(MyClass, [ref('string1')]), make(MyClass, [ref('string2')])]),
 //   };
-
+//
 //   const output = container(input);
-
+//
 //   expect(output.myClass).toBeInstanceOf(MyClass);
-
+//
 //   expect(output.myClass.arg1).toBeInstanceOf(MyClass);
 //   expect(output.myClass.arg1.arg1).toBe(input.string1);
-
+//
 //   expect(output.myClass.arg2).toBeInstanceOf(MyClass);
 //   expect(output.myClass.arg2.arg1).toBe(input.string2);
 // });

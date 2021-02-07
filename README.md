@@ -12,84 +12,60 @@ We are not saying you _should_ use DI for javascript, just that it's possible. I
 
 # Why you probably shouldn't use this
 
-This is **experimental** and hasn't been extensively tested in the wild. The feature set of this library is incomplete, and anything you can achieve with this library, you can also acheive using native JS (See [basics of DI](/docs/BASICS_OF_DI.md#final-thoughts)).
+> This is **experimental** and hasn't been extensively tested in the wild.
+> The feature set of this library is incomplete. See [basics of DI](/docs/BASICS_OF_DI.md#final-thoughts)).
+> There is currently only one author that may also be slow to respond to issues and pull requests.
 
-We certainly wouldn't recommend this for any real projects. We're just using it for experimentation. The author may also be slow to respond
-
-# Examples
-
-Click here for an example of [real world usage](/docs/EXAMPLE.md);
+We certainly wouldn't recommend this for any real projects. We're just using it for experimentation.
 
 # Usage
 
-You can use JSDI with only 3 functions. `container`, `make` and `ref`.
+You can use JSDI with only 3 functions. `container`, `make` and `ref`. Click here to see [the API](/docs/API.md).
 
-- `container` is used to wrap the root object.
+- `container` is used to wrap the object.
 - `make` is used to instanciate classes.
-- `ref` is used to reference other parts of the object.
+- `ref` is used to reference parts of the object.
 
-## `container(input: object): object`
-
-First, create some kind of container (global object) using the `container` function:
+Create a file like this describing your app (you can create multiple of these for multiple environments):
 
 ```js
-const MySuperGlobal = container({
-  hello: 'world',
+// src/builds/build-number-1.js
 
-  i: {
-    can: [{contain: 'anything'}],
-  },
-});
-```
+import MyClass from './MyClass';
+import MyFactory from './MyFactory';
 
-You can access your container using regular JS:
-
-```js
-console.log(MySuperGlobal.i); // > {can: [{contain: 'anything'}]}
-console.log(MySuperGlobal.i.can[0].contain); // > 'anything'
-```
-
-## `make(type: Constructor, args: any[] = [])`
-
-Then instruct JSDI to make the classes using the `make` function. :
-
-```js
-const MySuperGlobal = container({
-  myInstance: make(MyClass, ['arg1', 'arg2', {arg3: true}]),
-
-  myInstanceCreator: make(MyFactory, ['factoryArg1']),
-});
-```
-
-You can access your container using regular JS:
-
-```js
-console.log(MySuperGlobal.myInstance); // > MyClass
-console.log(MySuperGlobal.myInstanceCreator); // > MyFactory
-console.log(MySuperGlobal.myInstanceCreator.createMyClass()); // > MyClass
-```
-
-## `ref(name: string)`
-
-You can then reference other parts of the container using the `ref` function:
-
-```js
-const MySuperGlobal = container({
-  someGlobalOption: 10,
-
-  myConfig: {
-    secretPlatformKey: '<some secret>',
-    secretPlayformTimeout: ref('someGlobalOption'),
+export default container({
+  config: {
+    ENV: '<some environment>'
+    SOME_SECRET: '<secret>',
   },
 
-  myInstance: make(MyClass, ['arg1', ref('myConfig.secretPlatformKey')]),
-});
+  myClass: make(MyClass, [
+    ref('config.SOME_SECRET')
+    {
+      some: {
+        additional: 'config',
+        specific: ['to', 'this', 'class']
+      }
+    }
+  ]),
+
+  myFactory: make(MyFactory, [
+    ref('config.SOME_SECRET'),
+    ref('myClass'),
+  ])
+})
 ```
 
-You can access your container using regular JS:
+Then use it where ever you need to bootstrap the app:
 
 ```js
-console.log(MySuperGlobal.someGlobalOption); // > 10
-console.log(MySuperGlobal.myConfig.secretPlatformKey); // > '<some secret>'
-console.log(MySuperGlobal.myConfig.secretPlayformTimeout); // > 10
+// import build number 1
+import MyApp from 'src/builds/build-number-1';
+
+// bootstrap application
+const root = document.getElementById('root');
+MyApp.myClass.initialise(root);
 ```
+
+Click here for a [real world example](/docs/EXAMPLE.md)

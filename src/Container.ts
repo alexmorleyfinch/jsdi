@@ -2,6 +2,9 @@ import {GraphNode} from './GraphNode';
 import {MakePlaceholder, RefPlaceholder} from './placeholders';
 import {getIn, recurseObjectForPlaceholder, setIn} from './utils';
 
+/**
+ * Used for the main logic of replacing placeholders in an object.
+ */
 export class Container {
   private definition: object;
   private graph: GraphNode;

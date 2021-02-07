@@ -1,3 +1,6 @@
+/**
+ * Used as a graph node in a graph tree that we can iterate in order.
+ */
 export class GraphNode {
   id: string;
   nodes: GraphNode[];
