@@ -1,25 +1,19 @@
 import {Constructor} from './types';
 
-export class AbstractPlaceholder {}
-
-export class MakePlaceholder extends AbstractPlaceholder {
+export class MakePlaceholder {
   type: Constructor;
   args: any[];
 
   constructor(type: Constructor, args: any[]) {
-    super();
-
     this.type = type;
     this.args = args;
   }
 }
 
-export class RefPlaceholder extends AbstractPlaceholder {
+export class RefPlaceholder {
   name: string;
 
   constructor(name: string) {
-    super();
-
     this.name = name;
   }
 }

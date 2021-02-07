@@ -49,7 +49,7 @@ console.log(MySuperGlobal.i); // > {can: [{contain: 'anything'}]}
 console.log(MySuperGlobal.i.can[0].contain); // > 'anything'
 ```
 
-## `make(type: Constructor, args: any[] = []): AbstractPlaceholder`
+## `make(type: Constructor, args: any[] = [])`
 
 Then instruct JSDI to make the classes using the `make` function. :
 
@@ -69,7 +69,7 @@ console.log(MySuperGlobal.myInstanceCreator); // > MyFactory
 console.log(MySuperGlobal.myInstanceCreator.createMyClass()); // > MyClass
 ```
 
-## `ref(name: string): AbstractPlaceholder`
+## `ref(name: string)`
 
 You can then reference other parts of the container using the `ref` function:
 
