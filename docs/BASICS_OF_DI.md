@@ -160,7 +160,10 @@ const GlobalAppState = container({
 });
 ```
 
-and yes you are correct. However, native JS doesn't do many other DI concepts. Things like:
+It is easier to read, but it doesn't work.
 
+We can't use `this.logger` because `this` refers to `window`. Also, we don't always want in instanciate classes straight away. We can hold off instanciating them until they are needed. jsdi allows:
+
+- referencing other parts of the container
 - auto wiring [NOT YET IMPLEMENTED]
-- late instanciation as needed [NOT YET IMPLEMENTED]
+- just-in-time instanciation [NOT YET IMPLEMENTED]

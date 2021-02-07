@@ -19,23 +19,24 @@ export class Graph {
     return this.topLevelNodes.some((node) => node.isCircular());
   }
 
-  hasTopLevelNode(id: string) {
-    for (let i = 0; i < this.topLevelNodes.length; i++) {
-      if (this.topLevelNodes[i].id === id) {
-        return true;
-      }
-    }
-    return false;
+  addNode(node: GraphNode) {
+    this.topLevelNodes.push(node);
   }
 
-  removeTopLevel(id: string) {
+  getNode(id: string): GraphNode | null {
     for (let i = 0; i < this.topLevelNodes.length; i++) {
       if (this.topLevelNodes[i].id === id) {
-        const nodeToRemove = this.topLevelNodes[i];
-        this.topLevelNodes.splice(i, 1);
-        return nodeToRemove;
+        return this.topLevelNodes[i];
       }
     }
     return null;
+  }
+
+  removeNode(node: GraphNode): void {
+    const index = this.topLevelNodes.indexOf(node);
+
+    if (index >= 0) {
+      this.topLevelNodes.splice(index, 1);
+    }
   }
 }

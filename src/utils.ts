@@ -1,52 +1,26 @@
 import {Graph} from './Graph';
 import {GraphNode} from './GraphNode';
 import {MakePlaceholder, RefPlaceholder} from './placeholders';
+import {Constructor} from './types';
 
 export function buildGraph(definition: object): Graph {
   const graph = new Graph();
 
-  // for (const nextRef of recurseObjectForMarkers(definition, {ref: true})) {
-  //   if (nextRef.value instanceof RefPlaceholder) {
-  //     const refNode = new GraphNode(nextRef.value.name);
+  for (const nextMake of recurseObjectForPlaceholder<MakePlaceholder>(definition, MakePlaceholder)) {
+    const node = new GraphNode(nextMake.key.join('.'));
 
-  //     if (graph.hasTopLevelNode(refNode.id)) {
-  //       const newNode = graph.removeTopLevel(refNode.id);
+    for (const nextRef of recurseObjectForPlaceholder<RefPlaceholder>(nextMake.value.args, RefPlaceholder)) {
+      const existingNode = graph.getNode(nextRef.value.name);
 
-  //       if (newNode == null) {
-  //         throw new Error('Call to `ref` contained a string that points to a non-existent node');
-  //       }
-
-  //       graph.topLevelNodes.push(newNode);
-  //     } else {
-  //       graph.topLevelNodes.push(refNode);
-  //     }
-  //   }
-  // }
-
-  for (const nextMake of recurseObjectForMarkers(definition, {make: true})) {
-    if (nextMake.value instanceof MakePlaceholder) {
-      const node = new GraphNode(nextMake.key.join('.'));
-
-      for (const nextRef of recurseObjectForMarkers(nextMake.value.args, {ref: true})) {
-        if (nextRef.value instanceof RefPlaceholder) {
-          const refNode = new GraphNode(nextRef.value.name);
-
-          if (graph.hasTopLevelNode(refNode.id)) {
-            const newNode = graph.removeTopLevel(refNode.id);
-
-            if (newNode == null) {
-              throw new Error('Call to `ref` contained a string that points to a non-existent node');
-            }
-
-            node.addNode(newNode);
-          } else {
-            node.addNode(refNode);
-          }
-        }
+      if (existingNode) {
+        graph.removeNode(existingNode);
+        node.addNode(existingNode);
+      } else {
+        node.addNode(new GraphNode(nextRef.value.name));
       }
-
-      graph.topLevelNodes.push(node);
     }
+
+    graph.addNode(node);
   }
 
   return graph;
@@ -54,11 +28,9 @@ export function buildGraph(definition: object): Graph {
 
 export function processArgs(definition: object, args: any[]) {
   const newArgs = [...args];
-  for (const nextRef of recurseObjectForMarkers(args, {ref: true})) {
-    if (nextRef.value instanceof RefPlaceholder) {
-      const refValue = getIn(definition, nextRef.value.name.split('.'));
-      setIn(newArgs, nextRef.key, refValue);
-    }
+  for (const nextRef of recurseObjectForPlaceholder<RefPlaceholder>(args, RefPlaceholder)) {
+    const refValue = getIn(definition, nextRef.value.name.split('.'));
+    setIn(newArgs, nextRef.key, refValue);
   }
   return newArgs;
 }
@@ -81,10 +53,10 @@ export function getIn(start: object, keys: string[]) {
 function* recursiveGenerator(object: any, keys: string[] = []): IterableIterator<{key: string[]; value: any}> {
   if (Array.isArray(object)) {
     for (let i = 0; i < object.length; i++) {
-      const key = [...keys, i + ''];
+      const key = [...keys, i.toString()];
       yield* recursiveGenerator(object[i], key);
     }
-  } else if (isObject(object) && !(object instanceof MakePlaceholder || object instanceof RefPlaceholder)) {
+  } else if (isPlainObject(object)) {
     for (const name in object) {
       const key = [...keys, name];
       yield* recursiveGenerator(object[name], key);
@@ -94,15 +66,20 @@ function* recursiveGenerator(object: any, keys: string[] = []): IterableIterator
   }
 }
 
-function* recurseObjectForMarkers(object: object, {make = false, ref = false}) {
+function* recurseObjectForPlaceholder<T>(
+  object: object,
+  ctor: Constructor<T>,
+): IterableIterator<{key: string[]; value: T}> {
   for (const {value, key} of recursiveGenerator(object)) {
-    if ((ref && value instanceof RefPlaceholder) || (make && value instanceof MakePlaceholder)) {
+    if (value instanceof ctor) {
       yield {key, value};
     }
   }
 }
 
-function isObject(value: any) {
-  const type = typeof value;
-  return value != null && (type === 'object' || type === 'function');
+function isPlainObject(obj: any) {
+  if (typeof obj !== 'object' || obj === null) return false;
+
+  const proto = Object.getPrototypeOf(obj);
+  return proto !== null && Object.getPrototypeOf(proto) === null;
 }
