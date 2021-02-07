@@ -1,6 +1,6 @@
 {
   "name": "jsdi",
-  "version": "0.0.3",
+  "version": "1.0.0",
   "description": "Dependency injection for Javascript",
   "main": "./dist/index.js",
   "scripts": {

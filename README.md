@@ -15,13 +15,20 @@ We are not saying you _should_ use DI for javascript, just that it's possible. I
 > - This is **experimental** and hasn't been extensively tested in the wild.
 > - The feature set of this library is incomplete.
 > - There is currently only one author which may slow down responses to issues and pull requests.
+> - (This is literally my **first ever** npm library repo and there are likely to be teething problems at first)
 
 We certainly wouldn't recommend this for any real projects. We're just using it for experimentation.
 
 # Usage
 
+Add this to your `package.json` (I tried to publish this to NPM, but I had trouble. I'm looking into making this a legit npm module asap):
+
 ```
-npm install --save jsdi
+  "dependencies": {
+
+    "jsdi": "github:alexmorleyfinch/jsdi#1.0.0"
+
+  },
 ```
 
 You can use JSDI with only 3 functions. `container`, `make` and `ref`. Click here to see [the API](/docs/API.md).
