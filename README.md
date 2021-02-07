@@ -23,7 +23,7 @@ We certainly wouldn't recommend this for any real projects. We're just using it 
 You can use JSDI with only 3 functions. `container`, `make` and `ref`. Click here to see [the API](/docs/API.md).
 
 - `container` is used to wrap the object.
-- `make` is used to instanciate classes.
+- `make` is used to instantiate classes.
 - `ref` is used to reference parts of the object.
 
 Create a file like this describing your app (you can create multiple of these for multiple environments):

@@ -110,7 +110,7 @@ const canvas = document.getElementById('canvas');
 // Create renderer at runtime because it needs `canvas`
 const renderer = Container.rendererFactory.createCanvasRenderer(canvas);
 
-// Create level at runtime, because we don't want to instanciate ALL levels at once globally
+// Create level at runtime, because we don't want to instantiate ALL levels at once globally
 const level = Container.levelFactory.createLevel(Container.levels.level1);
 
 // No need to pass `controller` into the game here because it was required by the game factory

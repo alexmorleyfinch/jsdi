@@ -1,7 +1,7 @@
 import {Constructor} from './types';
 
 /**
- * Used to define a constructor that can be later instanciated.
+ * Used to define a constructor that can be later instantiated.
  */
 export class MakePlaceholder {
   type: Constructor;

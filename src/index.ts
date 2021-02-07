@@ -14,7 +14,7 @@ export function container(input: object): object {
 }
 
 /**
- * API, used to make a placeholder that defines a constructor that can later be instanciated.
+ * API, used to make a placeholder that defines a constructor that can later be instantiated.
  */
 export function make(type: Constructor, args: any[] = []): MakePlaceholder {
   return new MakePlaceholder(type, args);

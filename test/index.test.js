@@ -17,7 +17,7 @@ test('Should preserve input object', () => {
   expect(input).toEqual(output);
 });
 
-test('Should instanciate class', () => {
+test('Should instantiate class', () => {
   const MyClass = class {};
 
   const input = {

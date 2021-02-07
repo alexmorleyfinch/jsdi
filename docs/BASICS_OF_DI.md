@@ -59,7 +59,7 @@ This is the true power of DI. Ultimate configuration of your entire application 
 
 # Now everything is injected, and we have factories everywhere, what does my app look like?
 
-Well, continuing with the above example we now have a global `myClassFactory` that we wanna use every time we wanna instanciate a new `MyClass`.
+Well, continuing with the above example we now have a global `myClassFactory` that we wanna use every time we wanna instantiate a new `MyClass`.
 
 So we basically have some global state. We could do:
 
@@ -162,8 +162,8 @@ const GlobalAppState = container({
 
 It is easier to read, but it doesn't work.
 
-We can't use `this.logger` because `this` refers to `window`. Also, we don't always want in instanciate classes straight away. We can hold off instanciating them until they are needed. jsdi allows:
+We can't use `this.logger` because `this` refers to `window`. Also, we don't always want in instantiate classes straight away. We can hold off instantiating them until they are needed. jsdi allows:
 
 - referencing other parts of the container
 - auto wiring [NOT YET IMPLEMENTED]
-- just-in-time instanciation [NOT YET IMPLEMENTED]
+- just-in-time instantiation [NOT YET IMPLEMENTED]
