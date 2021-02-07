@@ -20,6 +20,10 @@ We certainly wouldn't recommend this for any real projects. We're just using it 
 
 # Usage
 
+```
+npm install --save jsdi
+```
+
 You can use JSDI with only 3 functions. `container`, `make` and `ref`. Click here to see [the API](/docs/API.md).
 
 - `container` is used to wrap the object.
@@ -31,6 +35,7 @@ Create a file like this describing your app (you can create multiple of these fo
 ```js
 // src/builds/build-number-1.js
 
+import {container, make, ref} from 'jsdi';
 import MyClass from './MyClass';
 import MyFactory from './MyFactory';
 
