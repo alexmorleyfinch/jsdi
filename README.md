@@ -14,7 +14,7 @@ We are not saying you _should_ use DI for javascript, just that it's possible. I
 
 > - This is **experimental** and hasn't been extensively tested in the wild.
 > - The feature set of this library is incomplete.
-> - There is currently only one author that may also be slow to respond to issues and pull requests.
+> - There is currently only one author which may slow down responses to issues and pull requests.
 
 We certainly wouldn't recommend this for any real projects. We're just using it for experimentation.
 
@@ -69,3 +69,7 @@ MyApp.myClass.initialise(root);
 ```
 
 Click here for a [real world example](/docs/EXAMPLE.md)
+
+# Contributing
+
+If you want to contribute and improve this library, great! Click here to see a [helpful contribution guide](/docs/CONTRIBUTING.md)

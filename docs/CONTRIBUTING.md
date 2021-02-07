@@ -10,12 +10,12 @@ He's the summary. We have a single top level object (passed into `container()`).
 
 We have a `definition` (an ad-hoc native JS object) that contains "placeholders" throughout. These placeholders can be deeply nested within the definition.
 
-Our main job is to iteritively find each placeholder and execute it:
+Our main job is to iteritively find each placeholder and replace it:
 
 - a MakePlaceholder makes instances given a constructor and arguments.
 - a RefPlaceholder refers to other parts of the `definition` and should copy the data from where it points, to where it is found.
 
-This poses a question. In what order do we execute the placeholders?
+This poses a question...
 
 # In what order do we execute the placeholders?
 
@@ -31,7 +31,7 @@ So, Container.ts:
 
 - builds a dependancy `graph` from all the placeholders found in the `definition` by recursively searching `definition`
 - iterates the graph depth first, ending on the root graph node.
-- for each node (placeholder), execute the placeholder
+- for each node (placeholder), replace the placeholder
 
 The placeholders will always be executed in the right order because of the depth first search.
 
@@ -40,3 +40,61 @@ This means we also have:
 - a `GraphNode.ts` for representing the graph.
 - one or more `placeholders.ts` which define the types of placeholder.
 - a bunch of `utils.ts` for recursive searches and for manipulating deep objects.
+
+# Getting up and running
+
+1. Get installed:
+
+```
+git clone https://github.com/alexmorleyfinch/jsdi.git
+cd jsdi
+npm install
+```
+
+2. Ensure tests pass
+
+```
+npm run test
+```
+
+## Contribute your code
+
+2. Modify the code
+
+3. Write unit tests and ensure your tests pass
+
+```
+npm run test
+```
+
+4. When your tests fail, debug the unit tests with
+
+```
+npm run debug
+```
+
+(which uses native node debugger)
+
+5. Check coverage and make sure you're happy
+
+```
+npm run coverage
+```
+
+## Before pushing
+
+6. Check linting
+
+```
+npm run lint
+```
+
+7. Build the new code
+
+```
+npm run build
+```
+
+8. Push your PR
+
+9. Profit???

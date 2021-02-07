@@ -164,9 +164,9 @@ const GlobalAppState = container({
 });
 ```
 
-It is easier to read, but it doesn't work.
+and you'd be correct. It is easier to read, but it doesn't work.
 
-We can't use `GlobalAppState.logger` because we can't use `GlobalAppState` before it has been defined. We also can't use `this.logger` because `thig` refers to the `window` object. So we need some kind of framework to be able to refer to existing parts of state.
+We can't use `GlobalAppState.logger` because we can't use `GlobalAppState` before it has been defined. We also can't use `this.logger` because `this` refers to the `window` object. So we need some kind of framework to be able to refer to existing parts of state.
 
 Using JSDI allows:
 
